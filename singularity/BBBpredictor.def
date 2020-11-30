@@ -1,0 +1,66 @@
+BootStrap: docker
+From: centos:8
+
+%labels
+    Author: Nicolas Soler
+    Date: 27 Nov. 2020
+
+%environment
+    # PATHS
+    export PATH=/opt/miniconda3/bin:$PATH
+    source activate sign
+
+%post
+    # bind paths
+    
+    # update yum
+    yum update -y
+
+    # basic packages
+    yum install -y gcc \
+                   gcc-c++ \
+                   gcc-gfortran \
+                   cmake \
+                   make \
+                   git \
+                   wget \
+                   curl \
+                   which \
+                   vim \
+                   bzip2 \
+                   bzip2-devel \
+                   file \
+                   libXrender \
+                   libXext \
+
+
+    # conda
+    mkdir -p /opt/miniconda3
+    cd /opt/miniconda3 
+    wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
+    bash Miniconda3-latest-Linux-x86_64.sh -p /opt/miniconda3 -b -f
+    rm Miniconda3-latest-Linux-x86_64.sh
+    export PATH=/opt/miniconda3/bin:$PATH
+
+    # create and activate conda enviroment
+    #conda init bash
+    conda update conda -y
+    conda create --no-default-packages -n sign -y python=3.7 tensorflow=1.14.0
+    source activate sign
+    conda install -c conda-forge -y rdkit
+
+    # The signaturizer package
+    pip install signaturizer
+
+    # utility packages
+    conda install numpy
+    conda install joblib
+    conda install -c anaconda scikit-learn=0.20.3        # Machine learning library
+
+    pip install wget                              # download library
+
+%files
+    ./run_BBB_predictor.py /opt
+    ./rf_from_signZ_paper_full.joblib /opt
+%runscript
+    python /opt/run_BBB_predictor.py $1
