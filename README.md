@@ -1,17 +1,16 @@
 In order to create the image and run the container:
 
-# Go to the singularity folder
+### Go to the singularity folder
 cd singularity
 
-# Build the image
+#### Build the image
 sudo singularity build BBBpredictor.simg BBBpredictor.def
 
-#You're ready to run the container as any executable on the example input file 
-# provided in the singularity/TEST folder
+### You're ready to run the container as any executable on the example input file provided in the singularity/TEST folder
 
 ./BBBpredictor.simg TEST/all_smiles.txt
 
-# See usage:
+### Usage:
 
 Blood-brain barrier (BBB) predictor:
 ------------------------------------
