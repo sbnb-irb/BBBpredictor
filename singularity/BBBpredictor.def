@@ -47,20 +47,22 @@ From: centos:8
     conda update conda -y
     conda create --no-default-packages -n sign -y python=3.7 tensorflow=1.14.0
     source activate sign
-    conda install -c conda-forge -y rdkit
+    conda install -y -c conda-forge rdkit
+    conda install -y joblib
+
 
     # The signaturizer package
     pip install signaturizer
 
     # utility packages
-    conda install numpy
-    conda install joblib
-    conda install -c anaconda scikit-learn=0.20.3        # Machine learning library
+    conda install -y numpy
+    conda install -y -c anaconda scikit-learn=0.20.3        # Machine learning library
 
     pip install wget                              # download library
 
 %files
     ./run_BBB_predictor.py /opt
     ./rf_from_signZ_paper_full.joblib /opt
+    ./NNmodels /opt
 %runscript
     python /opt/run_BBB_predictor.py $1
