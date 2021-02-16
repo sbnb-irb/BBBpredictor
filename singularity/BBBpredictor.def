@@ -53,7 +53,7 @@ From: centos:8
 
 
     # The signaturizer package
-    pip install signaturizer
+    pip install signaturizer==1.1.7
 
     # utility packages
     conda install -y numpy
