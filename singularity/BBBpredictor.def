@@ -9,7 +9,7 @@ From: centos:8
     # PATHS
     export PATH=/opt/miniconda3/bin:$PATH
     . /opt/miniconda3/etc/profile.d/conda.sh
-    source activate sign
+    conda activate sign
 
 %post
     # bind paths
