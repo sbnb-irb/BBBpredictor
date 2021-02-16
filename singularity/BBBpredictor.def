@@ -66,4 +66,4 @@ From: centos:8
     ./rf_from_signZ_paper_full.joblib /opt
     ./NNmodels /opt
 %runscript
-    python /opt/run_BBB_predictor.py $1
+    python /opt/run_BBB_predictor.py "$@"
