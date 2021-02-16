@@ -8,7 +8,8 @@ From: centos:8
 %environment
     # PATHS
     export PATH=/opt/miniconda3/bin:$PATH
-    source activate sign
+    . /opt/miniconda3/etc/profile.d/conda.sh
+    conda activate sign
 
 %post
     # bind paths
@@ -52,7 +53,7 @@ From: centos:8
 
 
     # The signaturizer package
-    pip install signaturizer
+    pip install signaturizer==1.1.7
 
     # utility packages
     conda install -y numpy
@@ -65,4 +66,4 @@ From: centos:8
     ./rf_from_signZ_paper_full.joblib /opt
     ./NNmodels /opt
 %runscript
-    python /opt/run_BBB_predictor.py $1
+    python /opt/run_BBB_predictor.py "$@"
